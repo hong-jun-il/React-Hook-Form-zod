@@ -5,9 +5,20 @@ const POSITION_VALUES = ["PM", "FRONTEND", "BACKEND", "DESIGN"] as const;
 
 const BaseSchema = z.object({
   email: z
-    .email({ error: "이메일 형식이 아닙니다." })
-    .trim()
-    .min(1, { error: "이메일을 입력해주세요." }),
+    .object({
+      id: z.string().min(1, "이메일을 입력하세요"),
+      domain: z.string().min(1, "도메인을 선택하세요"),
+    })
+    .refine(
+      (data) => {
+        const full = `${data.id}@${data.domain}`;
+        return z.email().safeParse(full).success;
+      },
+      {
+        message: "올바른 이메일 형식이 아닙니다.",
+        path: ["id"],
+      },
+    ),
   loginId: z.string().trim().min(1, { error: "아이디를 입력해주세요." }),
   gender: z
     .union([
@@ -17,8 +28,15 @@ const BaseSchema = z.object({
     .refine((val) => val !== "", {
       error: "성별을 선택해주세요.",
     }),
-  age: z.coerce.number({ error: "나이를 입력해주세요." }),
-  phone: z.string(),
+  birth: z.object({
+    year: z.string().min(1, { error: "연도를 선택하세요." }),
+    month: z.string().min(1, { error: "월을 선택하세요." }),
+    day: z.string().min(1, { error: "날짜를 선택하세요." }),
+  }),
+  phone: z.object({
+    prefix: z.string().min(1, { error: "전화번호 앞자리를 선택해주세요." }),
+    number: z.string().min(1, { error: "전화번호를 입력해주세요." }),
+  }),
   generation: z.coerce.number({ error: "기수를 선택해주세요." }),
   teamId: z.preprocess(
     (val) => (val === "" || val === undefined ? null : val),
@@ -89,13 +107,23 @@ export type MemberOutput = z.output<typeof MemberSchema>;
 export const defaultValues: MemberInput = {
   variant: "create",
   status: "NEW",
-  email: "",
+  email: {
+    id: "",
+    domain: "",
+  },
   loginId: "",
   password: "",
   confirmPassword: "",
   gender: "",
-  age: "",
-  phone: "",
+  birth: {
+    year: "",
+    month: "",
+    day: "",
+  },
+  phone: {
+    prefix: "010",
+    number: "",
+  },
   generation: "",
   teamId: "",
   position: "",

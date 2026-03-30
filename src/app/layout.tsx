@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import RQProvider from "@/components/RQProvider";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "react hook form test",
@@ -17,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={cn("font-sans", geist.variable)}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <RQProvider>
+          <main className={cn("h-dvh w-full")}>{children}</main>
+        </RQProvider>
+      </body>
     </html>
   );
 }

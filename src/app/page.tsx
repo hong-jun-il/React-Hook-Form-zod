@@ -1,20 +1,25 @@
-"use client";
+import { cn } from "@/lib/utils";
+import MemberForm from "./_components/MemberForm";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { getGenerations } from "@/lib/api/getGenarations";
 
-import ChevronDownIcon from "@/assets/ChevronDownIcon";
-import Input from "@/components/ui/Input";
-import Select, { OptionType } from "@/components/ui/Select";
+export default async function Members() {
+  const queryClient = new QueryClient();
 
-export default function page() {
-  const options: OptionType[] = [
-    { label: "선택해주세요", value: "" },
-    {
-      label: "test",
-      value: "test",
-    },
-  ];
+  await queryClient.prefetchQuery({
+    queryKey: ["generations"],
+    queryFn: getGenerations,
+  });
+
   return (
-    <div>
-      <Input />
+    <div className={cn("h-full w-full")}>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <MemberForm />
+      </HydrationBoundary>
     </div>
   );
 }
