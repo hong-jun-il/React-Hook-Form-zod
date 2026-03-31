@@ -25,24 +25,18 @@ export function BirthField() {
     name: "birth.month",
   });
 
-  const dayOptions: OptionType[] = [
+  const dayOptions: OptionType[] = Array.from(
     {
-      label: "일",
-      value: "",
+      length: new Date(Number(yearValue), Number(monthValue), 0).getDate(),
     },
-    ...Array.from(
-      {
-        length: new Date(Number(yearValue), Number(monthValue), 0).getDate(),
-      },
-      (_, i) => {
-        const day = String(i + 1);
-        return {
-          label: day.padStart(2, "0"),
-          value: day.padStart(2, "0"),
-        };
-      },
-    ),
-  ];
+    (_, i) => {
+      const day = String(i + 1);
+      return {
+        label: day.padStart(2, "0"),
+        value: day.padStart(2, "0"),
+      };
+    },
+  );
 
   return (
     <Field>
@@ -52,16 +46,19 @@ export function BirthField() {
           id="birth.year"
           name="birth.year"
           options={YEAR_OPTIONS}
+          placeholder="연도"
         />
         <RHFSelect<MemberInput>
           id="birth.month"
           name="birth.month"
           options={MONTH_OPTIONS}
+          placeholder="월"
         />
         <RHFSelect<MemberInput>
           id="birth.day"
           name="birth.day"
           options={dayOptions}
+          placeholder="일"
         />
       </div>
       {errorMessage && (

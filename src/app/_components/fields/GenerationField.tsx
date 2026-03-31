@@ -15,13 +15,10 @@ export default function GenerationField() {
     queryFn: getGenerations,
   });
 
-  const generationOptions: OptionType[] = [
-    { label: "기수", value: "" },
-    ...generations.map((generation) => ({
-      label: String(generation.generation),
-      value: generation.id,
-    })),
-  ];
+  const generationOptions: OptionType[] = generations.map((generation) => ({
+    label: String(generation.generation),
+    value: generation.id,
+  }));
 
   const { control } = useFormContext<MemberInput>();
   const { errors } = useFormState({ control, name: ["generation"] });
@@ -34,6 +31,7 @@ export default function GenerationField() {
           id="generation"
           name="generation"
           options={generationOptions}
+          placeholder="기수"
         />
       </div>
       {errorMessage && (

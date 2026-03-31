@@ -32,6 +32,7 @@ export function PhoneField() {
           id="phone.number"
           name="phone.number"
           placeholder="-없이 숫자만 입력"
+          maxLength={8}
           inputMode="numeric"
           transform={preventString}
         />

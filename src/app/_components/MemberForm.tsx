@@ -17,10 +17,12 @@ import { GenderField } from "./fields/GenderField";
 import { BirthField } from "./fields/BirthField";
 import { PhoneField } from "./fields/PhoneField";
 import GenerationField from "./fields/GenerationField";
+import TeamField from "./fields/TeamField";
+import PositionField from "./fields/PositionField";
 
 function MemberForm() {
   return (
-    <Card className="w-full max-w-125">
+    <Card className="mx-auto w-full max-w-125">
       <CardHeader>
         <CardTitle>멤버 추가</CardTitle>
         <CardDescription>Card Description</CardDescription>
@@ -34,7 +36,11 @@ function MemberForm() {
             <GenderField />
             <BirthField />
             <PhoneField />
-            <GenerationField />
+            <div className="flex">
+              <GenerationField />
+              <TeamField />
+            </div>
+            <PositionField />
           </FieldGroup>
         </form>
       </CardContent>

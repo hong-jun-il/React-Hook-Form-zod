@@ -15,12 +15,14 @@ export type OptionType = {
 type Props<T extends FieldValues> = {
   name: Path<T>;
   options: OptionType[];
+  placeholder?: string;
 } & NativeSelectProps;
 
 export default function RHFSelect<T extends FieldValues>({
   id,
   name,
   options,
+  placeholder,
   ...props
 }: Props<T>) {
   const { control } = useFormContext<T>();
@@ -31,13 +33,13 @@ export default function RHFSelect<T extends FieldValues>({
       control={control}
       render={({ field }) => (
         <NativeSelect {...field} {...props}>
+          {placeholder && (
+            <NativeSelectOption value="" disabled hidden>
+              {placeholder}
+            </NativeSelectOption>
+          )}
           {options.map((option) => (
-            <NativeSelectOption
-              key={option.value}
-              value={option.value}
-              disabled={option.value === ""}
-              hidden={option.value === ""}
-            >
+            <NativeSelectOption key={option.value} value={option.value}>
               {option.label}
             </NativeSelectOption>
           ))}

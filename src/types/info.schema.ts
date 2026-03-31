@@ -1,7 +1,7 @@
+import { POSITION_VALUES } from "@/constants/position.const";
 import z from "zod";
 
 const GENDER_VALUES = ["MAN", "WOMAN"] as const;
-const POSITION_VALUES = ["PM", "FRONTEND", "BACKEND", "DESIGN"] as const;
 
 const BaseSchema = z.object({
   email: z

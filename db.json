@@ -22,33 +22,29 @@
     }
   ],
   "teams": [
-    {
-      "generationId": 1,
-      "list": ["1기-프론트엔드A", "1기-백엔드B", "1기-디자인C"]
-    },
-    {
-      "generationId": 2,
-      "list": ["2기-알파팀", "2기-베타팀", "2기-감마팀"]
-    },
-    {
-      "generationId": 3,
-      "list": ["3기-챌린저", "3기-마스터", "3기-그랜드마스터"]
-    },
-    {
-      "generationId": 4,
-      "list": ["4기-데브옵스", "4기-시큐리티", "4기-인프라"]
-    },
-    {
-      "generationId": 5,
-      "list": []
-    }
+    { "id": 101, "generationId": 1, "name": "1기-프론트엔드A" },
+    { "id": 102, "generationId": 1, "name": "1기-백엔드B" },
+    { "id": 103, "generationId": 1, "name": "1기-디자인C" },
+    { "id": 201, "generationId": 2, "name": "2기-알파팀" },
+    { "id": 202, "generationId": 2, "name": "2기-베타팀" },
+    { "id": 301, "generationId": 3, "name": "3기-챌린저" },
+    { "id": 302, "generationId": 3, "name": "3기-마스터" },
+    { "id": 401, "generationId": 4, "name": "4기-데브옵스" },
+    { "id": 402, "generationId": 4, "name": "4기-시큐리티" }
   ],
   "members": [
     {
       "id": 1,
       "email": "user1@user.com",
       "loginId": "user1",
-      "password": "user1@user1"
+      "password": "user1@user1",
+      "gender": "WOMAN",
+      "birth": { "year": "2002", "month": "03", "day": "20" },
+      "phone": { "prefix": "010", "number": "11112222" },
+      "generation": 1,
+      "teamId": 103,
+      "position": "DE",
+      "isAgreed": true
     }
   ]
 }
