@@ -1,4 +1,3 @@
-import { POSITION_VALUES } from "@/constants/position.const";
 import z from "zod";
 
 const GENDER_VALUES = ["MAN", "WOMAN"] as const;
@@ -42,12 +41,7 @@ const BaseSchema = z.object({
     (val) => (val === "" || val === undefined ? null : val),
     z.coerce.number({ error: "올바른 팀의 형식이 아닙니다." }),
   ),
-  position: z
-    .union([
-      z.literal(""),
-      z.enum(POSITION_VALUES, { error: "파트를 선택해주세요." }),
-    ])
-    .refine((val) => val !== "", { error: "파트를 선택해주세요." }),
+  positionId: z.coerce.number({ error: "직무를 선택해주세요." }),
   stacks: z.array(z.string().trim()),
   isAgreed: z.boolean(),
 });
@@ -126,7 +120,7 @@ export const defaultValues: MemberInput = {
   },
   generation: "",
   teamId: "",
-  position: "",
+  positionId: "",
   stacks: [],
   isAgreed: false,
   graduationDate: "",

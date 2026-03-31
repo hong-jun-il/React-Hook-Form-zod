@@ -19,7 +19,6 @@ type Props<T extends FieldValues> = {
 } & NativeSelectProps;
 
 export default function RHFSelect<T extends FieldValues>({
-  id,
   name,
   options,
   placeholder,

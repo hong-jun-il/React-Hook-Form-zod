@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/combobox";
 import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
 import { Fragment } from "react/jsx-runtime";
+import { OptionType } from "./RHFSelect";
 
 const frameworks = [
   "Next.js",
@@ -25,7 +26,8 @@ const frameworks = [
 
 type Props<T extends FieldValues> = {
   name: Path<T>;
-  items: (string | number)[];
+  items: OptionType[];
+  id?: string;
   empty?: string;
   placeholder?: string;
 };
@@ -33,6 +35,7 @@ type Props<T extends FieldValues> = {
 export function RHFComboboxMultiple<T extends FieldValues>({
   name,
   items,
+  id,
   empty = "No items found.",
   placeholder,
 }: Props<T>) {
@@ -45,6 +48,7 @@ export function RHFComboboxMultiple<T extends FieldValues>({
       control={control}
       render={({ field }) => (
         <Combobox
+          id={id}
           multiple
           autoHighlight
           items={items}
@@ -64,11 +68,11 @@ export function RHFComboboxMultiple<T extends FieldValues>({
             </ComboboxValue>
           </ComboboxChips>
           <ComboboxContent anchor={anchor}>
-            <ComboboxEmpty>No items found.</ComboboxEmpty>
+            <ComboboxEmpty>{empty}</ComboboxEmpty>
             <ComboboxList>
-              {(item) => (
-                <ComboboxItem key={item} value={item}>
-                  {item}
+              {(item: OptionType) => (
+                <ComboboxItem key={item.value} value={item.value}>
+                  {item.label}
                 </ComboboxItem>
               )}
             </ComboboxList>

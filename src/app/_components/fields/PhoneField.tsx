@@ -21,7 +21,7 @@ export function PhoneField() {
 
   return (
     <Field>
-      <Label htmlFor="birth.number">핸드폰</Label>
+      <Label htmlFor="phone.number">핸드폰</Label>
       <div className={cn("flex items-center gap-2")}>
         <RHFSelect<MemberInput>
           id="phone.prefix"

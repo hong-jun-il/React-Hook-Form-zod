@@ -19,6 +19,7 @@ import { PhoneField } from "./fields/PhoneField";
 import GenerationField from "./fields/GenerationField";
 import TeamField from "./fields/TeamField";
 import PositionField from "./fields/PositionField";
+import StackField from "./fields/StackField";
 
 function MemberForm() {
   return (
@@ -40,7 +41,10 @@ function MemberForm() {
               <GenerationField />
               <TeamField />
             </div>
-            <PositionField />
+            <div className="flex">
+              <PositionField />
+              <StackField />
+            </div>
           </FieldGroup>
         </form>
       </CardContent>

@@ -32,6 +32,29 @@
     { "id": 401, "generationId": 4, "name": "4기-데브옵스" },
     { "id": 402, "generationId": 4, "name": "4기-시큐리티" }
   ],
+  "positions": [
+    { "id": 1, "position": "PM" },
+    { "id": 2, "position": "DE" },
+    { "id": 3, "position": "FE" },
+    { "id": 4, "position": "BE" }
+  ],
+  "stacks": [
+    { "id": 1, "positionId": 1, "stack": "Jira" },
+    { "id": 2, "positionId": 1, "stack": "Confluence" },
+    { "id": 3, "positionId": 1, "stack": "Figma" },
+    { "id": 4, "positionId": 2, "stack": "Python" },
+    { "id": 5, "positionId": 2, "stack": "Apache Airflow" },
+    { "id": 6, "positionId": 2, "stack": "Spark" },
+    { "id": 7, "positionId": 2, "stack": "Kubernetes" },
+    { "id": 8, "positionId": 3, "stack": "React" },
+    { "id": 9, "positionId": 3, "stack": "Next.js" },
+    { "id": 10, "positionId": 3, "stack": "TypeScript" },
+    { "id": 11, "positionId": 3, "stack": "Tailwind CSS" },
+    { "id": 12, "positionId": 4, "stack": "Spring Boot" },
+    { "id": 13, "positionId": 4, "stack": "Go" },
+    { "id": 14, "positionId": 4, "stack": "PostgreSQL" },
+    { "id": 15, "positionId": 4, "stack": "Redis" }
+  ],
   "members": [
     {
       "id": 1,
@@ -43,7 +66,7 @@
       "phone": { "prefix": "010", "number": "11112222" },
       "generation": 1,
       "teamId": 103,
-      "position": "DE",
+      "positionId": 1,
       "isAgreed": true
     }
   ]

@@ -53,15 +53,13 @@ export default function TeamField() {
   return (
     <Field>
       <Label htmlFor="teamId">팀</Label>
-      <div className={cn("flex items-center gap-2")}>
-        <RHFSelect<MemberInput>
-          id="teamId"
-          name="teamId"
-          options={teamOptions}
-          disabled={teamOptions.length === 0 || isPending}
-          placeholder={getPlaceholder()}
-        />
-      </div>
+      <RHFSelect<MemberInput>
+        id="teamId"
+        name="teamId"
+        options={teamOptions}
+        disabled={teamOptions.length === 0 || isPending}
+        placeholder={getPlaceholder()}
+      />
       {errorMessage && (
         <p className="text-destructive mt-1 text-sm">{errorMessage}</p>
       )}

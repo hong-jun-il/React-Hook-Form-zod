@@ -3,27 +3,37 @@
 import RHFSelect, { OptionType } from "@/components/RHF/RHFSelect";
 import { Field } from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
-import { BASE_URL } from "@/constants/base_url.const";
-import { POSITIONS_OPTIONS } from "@/constants/position.const";
-import { cn } from "@/lib/utils";
+import { getPositions } from "@/lib/api/getPositions";
 import { MemberInput } from "@/types/info.schema";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useFormContext, useFormState } from "react-hook-form";
 
 export default function PositionField() {
   const { control } = useFormContext<MemberInput>();
-  const { errors } = useFormState({ control, name: ["position"] });
-  const errorMessage = errors.position?.message;
+  const { errors } = useFormState({ control, name: ["positionId"] });
+  const errorMessage = errors.positionId?.message;
+
+  const { data: positions } = useSuspenseQuery({
+    queryKey: ["positions"],
+    queryFn: getPositions,
+  });
+
+  const positionOptions: OptionType[] = positions.map((position) => {
+    return {
+      value: position.id,
+      label: position.position,
+    };
+  });
 
   return (
     <Field>
-      <Label htmlFor="position">직무</Label>
-      <div className={cn("flex items-center gap-2")}>
-        <RHFSelect<MemberInput>
-          id="position"
-          name="position"
-          options={POSITIONS_OPTIONS}
-        />
-      </div>
+      <Label htmlFor="positionId">직무</Label>
+      <RHFSelect<MemberInput>
+        id="positionId"
+        name="positionId"
+        options={positionOptions}
+        placeholder="직무"
+      />
       {errorMessage && (
         <p className="text-destructive mt-1 text-sm">{errorMessage}</p>
       )}

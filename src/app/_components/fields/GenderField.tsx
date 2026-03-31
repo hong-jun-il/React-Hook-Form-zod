@@ -19,7 +19,7 @@ export function GenderField() {
 
   return (
     <Field>
-      <Label htmlFor="gender">성별</Label>
+      <Label>성별</Label>
       <RHFRadioGroup<MemberInput> name="gender" options={genderOptions} />
       {errorMessage && (
         <p className="text-destructive mt-1 text-sm">{errorMessage}</p>

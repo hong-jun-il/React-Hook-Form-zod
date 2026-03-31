@@ -10,15 +10,9 @@ export const EMAIL_DOMAINS = {
 } as const;
 
 export const EMAIL_DOMAIN_LIST = Object.values(EMAIL_DOMAINS);
-export const EMAIL_OPTIONS: OptionType[] = [
-  {
-    label: "직접 입력",
-    value: "",
-  },
-  ...EMAIL_DOMAIN_LIST.map((domain) => ({
-    label: domain,
-    value: domain,
-  })),
-];
+export const EMAIL_OPTIONS: OptionType[] = EMAIL_DOMAIN_LIST.map((domain) => ({
+  label: domain,
+  value: domain,
+}));
 
 export type EmailDomain = (typeof EMAIL_DOMAINS)[keyof typeof EMAIL_DOMAINS];
