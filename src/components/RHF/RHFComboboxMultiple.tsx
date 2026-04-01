@@ -67,7 +67,7 @@ export function RHFComboboxMultiple<T extends FieldValues>({
         >
           <ComboboxChips
             ref={anchor}
-            className={cn("w-full max-w-xs", disabled && "")}
+            className={cn("w-full max-w-xs", disabled && "bg-muted")}
           >
             <ComboboxValue>
               {(values) => (
@@ -75,7 +75,11 @@ export function RHFComboboxMultiple<T extends FieldValues>({
                   {values.map((value: string) => (
                     <ComboboxChip key={value}>{idMap.get(value)}</ComboboxChip>
                   ))}
-                  <ComboboxChipsInput placeholder={placeholder} />
+                  <ComboboxChipsInput
+                    placeholder={placeholder}
+                    disabled={disabled}
+                    className="disabled:cursor-not-allowed"
+                  />
                 </Fragment>
               )}
             </ComboboxValue>

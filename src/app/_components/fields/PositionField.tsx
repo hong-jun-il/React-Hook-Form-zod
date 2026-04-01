@@ -9,7 +9,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { useFormContext, useFormState } from "react-hook-form";
 
 export default function PositionField() {
-  const { control } = useFormContext<MemberInput>();
+  const { control, setValue } = useFormContext<MemberInput>();
   const { errors } = useFormState({ control, name: ["positionId"] });
   const errorMessage = errors.positionId?.message;
 
@@ -33,6 +33,7 @@ export default function PositionField() {
         name="positionId"
         options={positionOptions}
         placeholder="직무"
+        onChange={() => setValue("stacks", [])}
       />
       {errorMessage && (
         <p className="text-destructive mt-1 text-sm">{errorMessage}</p>

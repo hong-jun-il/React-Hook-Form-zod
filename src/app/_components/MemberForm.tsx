@@ -20,8 +20,18 @@ import GenerationField from "./fields/GenerationField";
 import TeamField from "./fields/TeamField";
 import PositionField from "./fields/PositionField";
 import StackField from "./fields/StackField";
+import { useFormContext, useWatch } from "react-hook-form";
+import { MemberInput } from "@/types/info.schema";
+import AgreeField from "./fields/AgreeField";
+import ExperienceField from "./fields/ExperienceField";
 
 function MemberForm() {
+  const { control } = useFormContext<MemberInput>();
+  const status = useWatch({
+    control,
+    name: "status",
+  });
+
   return (
     <Card className="mx-auto w-full max-w-125">
       <CardHeader>
@@ -45,6 +55,9 @@ function MemberForm() {
               <PositionField />
               <StackField />
             </div>
+            <AgreeField />
+            <ExperienceField />
+            {status === "NEW" ? <>신입</> : <>경력</>}
           </FieldGroup>
         </form>
       </CardContent>

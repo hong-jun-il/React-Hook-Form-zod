@@ -6,6 +6,7 @@ import {
   NativeSelectOption,
   NativeSelectProps,
 } from "../ui/native-select";
+import { ChangeEvent } from "react";
 
 export type OptionType = {
   label: string;
@@ -15,12 +16,14 @@ export type OptionType = {
 type Props<T extends FieldValues> = {
   name: Path<T>;
   options: OptionType[];
+  onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
   placeholder?: string;
 } & NativeSelectProps;
 
 export default function RHFSelect<T extends FieldValues>({
   name,
   options,
+  onChange,
   placeholder,
   ...props
 }: Props<T>) {
@@ -31,7 +34,15 @@ export default function RHFSelect<T extends FieldValues>({
       name={name}
       control={control}
       render={({ field }) => (
-        <NativeSelect {...field} {...props}>
+        <NativeSelect
+          {...field}
+          {...props}
+          onChange={(e) => {
+            field.onChange(e);
+
+            onChange?.(e);
+          }}
+        >
           {placeholder && (
             <NativeSelectOption value="" disabled hidden>
               {placeholder}
