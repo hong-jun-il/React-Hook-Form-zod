@@ -15,6 +15,7 @@ import {
 import { Controller, FieldValues, Path, useFormContext } from "react-hook-form";
 import { Fragment } from "react/jsx-runtime";
 import { OptionType } from "./RHFSelect";
+import { cn } from "@/lib/utils";
 
 const frameworks = [
   "Next.js",
@@ -30,6 +31,7 @@ type Props<T extends FieldValues> = {
   id?: string;
   empty?: string;
   placeholder?: string;
+  disabled?: boolean;
 };
 
 export function RHFComboboxMultiple<T extends FieldValues>({
@@ -38,9 +40,16 @@ export function RHFComboboxMultiple<T extends FieldValues>({
   id,
   empty = "No items found.",
   placeholder,
+  disabled,
 }: Props<T>) {
   const { control } = useFormContext<T>();
   const anchor = useComboboxAnchor();
+
+  const idMap = items.reduce((acc, cur) => {
+    acc.set(cur.value, cur.label);
+
+    return acc;
+  }, new Map());
 
   return (
     <Controller
@@ -54,15 +63,19 @@ export function RHFComboboxMultiple<T extends FieldValues>({
           items={items}
           value={field.value}
           onValueChange={field.onChange}
+          disabled={disabled}
         >
-          <ComboboxChips ref={anchor} className="w-full max-w-xs">
+          <ComboboxChips
+            ref={anchor}
+            className={cn("w-full max-w-xs", disabled && "")}
+          >
             <ComboboxValue>
               {(values) => (
                 <Fragment>
                   {values.map((value: string) => (
-                    <ComboboxChip key={value}>{value}</ComboboxChip>
+                    <ComboboxChip key={value}>{idMap.get(value)}</ComboboxChip>
                   ))}
-                  <ComboboxChipsInput />
+                  <ComboboxChipsInput placeholder={placeholder} />
                 </Fragment>
               )}
             </ComboboxValue>

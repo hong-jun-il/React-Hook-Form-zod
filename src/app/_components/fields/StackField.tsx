@@ -20,7 +20,7 @@ export default function StackField() {
     name: "positionId",
   });
 
-  const { data: stacks } = useQuery({
+  const { data: stacks, isPending } = useQuery({
     queryKey: ["stacks", positionId],
     queryFn: async (): Promise<Stack[]> => {
       const res = await fetch(
@@ -44,6 +44,22 @@ export default function StackField() {
       };
     }) || [];
 
+  const getPlaceHolder = () => {
+    if (!positionId) {
+      return "직군을 먼저 선택해주세요.";
+    }
+
+    if (isPending) {
+      return "기술 스택 로딩중...";
+    }
+
+    if (stackOptions.length === 0) {
+      return "등록된 기술 스택이 없습니다.";
+    }
+
+    return "기술 스택을 선택해주세요.";
+  };
+
   return (
     <Field>
       <Label htmlFor="stacks">기술 스택</Label>
@@ -51,6 +67,8 @@ export default function StackField() {
         id="stacks"
         name="stacks"
         items={stackOptions}
+        disabled={!positionId || isPending}
+        placeholder={getPlaceHolder()}
       />
       {errorMessage && (
         <p className="text-destructive mt-1 text-sm">{errorMessage}</p>
