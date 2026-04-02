@@ -20,17 +20,41 @@ import GenerationField from "./fields/GenerationField";
 import TeamField from "./fields/TeamField";
 import PositionField from "./fields/PositionField";
 import StackField from "./fields/StackField";
-import { useFormContext, useWatch } from "react-hook-form";
+import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { MemberInput } from "@/types/info.schema";
 import AgreeField from "./fields/AgreeField";
 import ExperienceField from "./fields/ExperienceField";
+import ExperienceNewField from "./fields/ExperienceNewField";
+import { useEffect } from "react";
+import ExperienceExpField from "./fields/ExperienceExpField";
 
 function MemberForm() {
-  const { control } = useFormContext<MemberInput>();
+  const { control, unregister, setValue } = useFormContext<MemberInput>();
   const status = useWatch({
     control,
     name: "status",
   });
+
+  const { append } = useFieldArray({
+    control,
+    name: "experiences",
+  });
+
+  useEffect(() => {
+    if (status === "EXP") {
+      unregister("graduationDate");
+      append([]);
+    } else if (status === "NEW") {
+      unregister("experiences");
+      setValue("graduationDate", "");
+    }
+  }, [status, unregister]);
+
+  console.log(
+    useWatch({
+      control,
+    }),
+  );
 
   return (
     <Card className="mx-auto w-full max-w-125">
@@ -57,7 +81,7 @@ function MemberForm() {
             </div>
             <AgreeField />
             <ExperienceField />
-            {status === "NEW" ? <>신입</> : <>경력</>}
+            {status === "NEW" ? <ExperienceNewField /> : <ExperienceExpField />}
           </FieldGroup>
         </form>
       </CardContent>

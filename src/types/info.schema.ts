@@ -81,11 +81,11 @@ const StatusSchema = z.discriminatedUnion("status", [
     experiences: z.array(
       z
         .object({
-          from: z.coerce.date({ error: "시작일을 선택해주세요." }),
-          to: z.coerce.date({ error: "종료일을 선택해주세요." }),
+          from: z.string().min(1, { error: "시작일을 선택해주세요." }),
+          to: z.string().min(1, { error: "시작일을 선택해주세요." }),
           companyName: z.string().min(1, { error: "회사명을 입력해주세요" }),
         })
-        .refine((data) => data.to >= data.from, {
+        .refine((data) => new Date(data.to) >= new Date(data.from), {
           error: "종료일은 시작일보다 빠를 수 없습니다.",
           path: ["to"],
         }),

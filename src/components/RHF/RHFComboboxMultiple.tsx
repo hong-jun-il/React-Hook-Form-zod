@@ -17,14 +17,6 @@ import { Fragment } from "react/jsx-runtime";
 import { OptionType } from "./RHFSelect";
 import { cn } from "@/lib/utils";
 
-const frameworks = [
-  "Next.js",
-  "SvelteKit",
-  "Nuxt.js",
-  "Remix",
-  "Astro",
-] as const;
-
 type Props<T extends FieldValues> = {
   name: Path<T>;
   items: OptionType[];
