@@ -2,8 +2,7 @@
 
 import RHFCombobox from "@/components/RHF/RHFCombobox";
 import RHFTextField from "@/components/RHF/RHFTextField";
-import { Field } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { EMAIL_DOMAIN_LIST } from "@/constants/emails.const";
 import { cn } from "@/lib/utils";
 import { MemberInput } from "@/types/info.schema";
@@ -15,11 +14,12 @@ export function EmailField() {
     control,
     name: ["email"],
   });
-  const errorMessage = errors.email?.id?.message;
+
+  const errorMessage = errors.email?.message;
 
   return (
     <Field>
-      <Label htmlFor="emailId">이메일</Label>
+      <FieldLabel htmlFor="emailId">이메일</FieldLabel>
       <div className={cn("flex items-center gap-2")}>
         <RHFTextField<MemberInput> id="emailId" name="email.id" />
         <span>@</span>

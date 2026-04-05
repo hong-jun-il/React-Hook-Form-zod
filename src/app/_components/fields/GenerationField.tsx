@@ -1,8 +1,7 @@
 "use client";
 
 import RHFSelect, { OptionType } from "@/components/RHF/RHFSelect";
-import { Field } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { getGenerations } from "@/lib/api/getGenarations";
 import { MemberInput } from "@/types/info.schema";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -25,7 +24,7 @@ export default function GenerationField() {
 
   return (
     <Field>
-      <Label htmlFor="generation">기수</Label>
+      <FieldLabel htmlFor="generation">기수</FieldLabel>
       <RHFSelect<MemberInput>
         id="generation"
         name="generation"

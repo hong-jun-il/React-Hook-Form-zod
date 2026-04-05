@@ -2,8 +2,7 @@
 
 import RHFRadioGroup from "@/components/RHF/RHFRadioGroup";
 import { OptionType } from "@/components/RHF/RHFSelect";
-import { Field } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { MemberInput } from "@/types/info.schema";
 import { useFormContext, useFormState } from "react-hook-form";
 
@@ -25,7 +24,7 @@ export default function ExperienceField() {
 
   return (
     <Field className="space-y-2">
-      <Label>경력 여부</Label>
+      <FieldLabel>경력 여부</FieldLabel>
       <RHFRadioGroup<MemberInput> name="status" options={experienceOptions} />
       {errorMessage && (
         <p className="text-destructive mt-1 text-sm">{errorMessage}</p>

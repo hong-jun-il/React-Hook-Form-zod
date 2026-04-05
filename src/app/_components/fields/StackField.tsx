@@ -2,8 +2,7 @@
 
 import { RHFComboboxMultiple } from "@/components/RHF/RHFComboboxMultiple";
 import { OptionType } from "@/components/RHF/RHFSelect";
-import { Field } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { BASE_URL } from "@/constants/base_url.const";
 import { MemberInput } from "@/types/info.schema";
 import { Stack } from "@/types/stack.type";
@@ -62,7 +61,7 @@ export default function StackField() {
 
   return (
     <Field>
-      <Label htmlFor="stacks">기술 스택</Label>
+      <FieldLabel htmlFor="stacks">기술 스택</FieldLabel>
       <RHFComboboxMultiple<MemberInput>
         id="stacks"
         name="stacks"

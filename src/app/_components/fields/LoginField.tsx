@@ -1,8 +1,7 @@
 "use client";
 
 import RHFTextField from "@/components/RHF/RHFTextField";
-import { Field } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { MemberInput } from "@/types/info.schema";
 import { useFormContext, useFormState } from "react-hook-form";
 
@@ -13,11 +12,9 @@ export function LoginField() {
 
   return (
     <Field>
-      <Label htmlFor="loginId">아이디</Label>
+      <FieldLabel htmlFor="loginId">아이디</FieldLabel>
       <RHFTextField<MemberInput> id="loginId" name="loginId" />
-      {errorMessage && (
-        <p className="text-destructive mt-1 text-sm">{errorMessage}</p>
-      )}
+      {errorMessage && <FieldError>{errorMessage}</FieldError>}
     </Field>
   );
 }

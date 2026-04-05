@@ -1,8 +1,7 @@
 "use client";
 
 import RHFCheckbox from "@/components/RHF/RHFCheckbox";
-import { Field } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { MemberInput } from "@/types/info.schema";
 import { useFormContext, useFormState } from "react-hook-form";
 
@@ -13,7 +12,7 @@ export default function AgreeField() {
 
   return (
     <Field orientation="horizontal">
-      <Label htmlFor="isAgreed">조건 동의 여부</Label>
+      <FieldLabel htmlFor="isAgreed">조건 동의 여부</FieldLabel>
       <RHFCheckbox<MemberInput> id="isAgreed" name="isAgreed" />
       {errorMessage && (
         <p className="text-destructive mt-1 text-sm">{errorMessage}</p>

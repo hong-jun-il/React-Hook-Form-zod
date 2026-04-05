@@ -20,22 +20,36 @@ import GenerationField from "./fields/GenerationField";
 import TeamField from "./fields/TeamField";
 import PositionField from "./fields/PositionField";
 import StackField from "./fields/StackField";
-import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
-import { MemberInput } from "@/types/info.schema";
+import {
+  SubmitHandler,
+  useFieldArray,
+  useFormContext,
+  useWatch,
+} from "react-hook-form";
+import { defaultValues, MemberInput, MemberOutput } from "@/types/info.schema";
 import AgreeField from "./fields/AgreeField";
 import ExperienceField from "./fields/ExperienceField";
 import ExperienceNewField from "./fields/ExperienceNewField";
 import { useEffect } from "react";
 import ExperienceExpField from "./fields/ExperienceExpField";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import PasswordField from "./fields/PasswordField";
 
 function MemberForm() {
-  const { control, unregister, setValue } = useFormContext<MemberInput>();
+  const { control, unregister, setValue, handleSubmit, reset } =
+    useFormContext<MemberInput>();
   const status = useWatch({
     control,
     name: "status",
   });
 
-  const { append } = useFieldArray({
+  const variant = useWatch({
+    control,
+    name: "variant",
+  });
+
+  const { replace } = useFieldArray({
     control,
     name: "experiences",
   });
@@ -43,12 +57,30 @@ function MemberForm() {
   useEffect(() => {
     if (status === "EXP") {
       unregister("graduationDate");
-      append([]);
+      replace([]);
     } else if (status === "NEW") {
       unregister("experiences");
       setValue("graduationDate", "");
     }
-  }, [status, unregister]);
+  }, [status, unregister, setValue]);
+
+  const onSubmit: SubmitHandler<MemberInput> = (data) => {
+    console.log(data);
+
+    alert("폼 데이터 제출 성공!");
+  };
+
+  const onInvalid = (errors: any) => {
+    console.log("에러::::::", errors);
+  };
+
+  const onReset = () => {
+    const shouldReset = confirm("폼을 초기화 하시겠습니까?");
+
+    if (shouldReset) {
+      reset(defaultValues);
+    }
+  };
 
   console.log(
     useWatch({
@@ -60,14 +92,13 @@ function MemberForm() {
     <Card className="mx-auto w-full max-w-125">
       <CardHeader>
         <CardTitle>멤버 추가</CardTitle>
-        <CardDescription>Card Description</CardDescription>
-        <CardAction>Card Action</CardAction>
       </CardHeader>
       <CardContent>
-        <form>
+        <form id="member-form" onSubmit={handleSubmit(onSubmit, onInvalid)}>
           <FieldGroup>
             <EmailField />
             <LoginField />
+            {variant === "create" && <PasswordField />}
             <GenderField />
             <BirthField />
             <PhoneField />
@@ -85,8 +116,16 @@ function MemberForm() {
           </FieldGroup>
         </form>
       </CardContent>
-      <CardFooter>
-        <p>Card Footer</p>
+      <CardFooter className={cn("flex justify-end gap-2")}>
+        <Button type="submit" form="member-form">
+          제출
+        </Button>
+        <Button
+          onClick={onReset}
+          className="bg-red-400 transition-colors duration-200 hover:bg-red-500"
+        >
+          초기화
+        </Button>
       </CardFooter>
     </Card>
   );

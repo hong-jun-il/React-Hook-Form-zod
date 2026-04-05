@@ -1,10 +1,8 @@
 "use client";
 
 import RHFSelect, { OptionType } from "@/components/RHF/RHFSelect";
-import { Field } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { BASE_URL } from "@/constants/base_url.const";
-import { cn } from "@/lib/utils";
 import { MemberInput } from "@/types/info.schema";
 import { Team } from "@/types/team.type";
 import { useQuery } from "@tanstack/react-query";
@@ -52,7 +50,7 @@ export default function TeamField() {
 
   return (
     <Field>
-      <Label htmlFor="teamId">팀</Label>
+      <FieldLabel htmlFor="teamId">팀</FieldLabel>
       <RHFSelect<MemberInput>
         id="teamId"
         name="teamId"

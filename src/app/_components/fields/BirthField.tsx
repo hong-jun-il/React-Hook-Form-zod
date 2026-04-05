@@ -3,8 +3,7 @@
 import RHFSelect, { OptionType } from "@/components/RHF/RHFSelect";
 import { MemberInput } from "@/types/info.schema";
 import { useFormContext, useFormState, useWatch } from "react-hook-form";
-import { Field } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
 import { MONTH_OPTIONS, YEAR_OPTIONS } from "@/constants/day.const";
 
@@ -40,7 +39,7 @@ export function BirthField() {
 
   return (
     <Field>
-      <Label htmlFor="birth.year">생년월일</Label>
+      <FieldLabel htmlFor="birth.year">생년월일</FieldLabel>
       <div className={cn("flex items-center gap-2")}>
         <RHFSelect<MemberInput>
           id="birth.year"

@@ -1,8 +1,7 @@
 "use client";
 
 import RHFSelect, { OptionType } from "@/components/RHF/RHFSelect";
-import { Field } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { getPositions } from "@/lib/api/getPositions";
 import { MemberInput } from "@/types/info.schema";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -27,7 +26,7 @@ export default function PositionField() {
 
   return (
     <Field>
-      <Label htmlFor="positionId">직무</Label>
+      <FieldLabel htmlFor="positionId">직무</FieldLabel>
       <RHFSelect<MemberInput>
         id="positionId"
         name="positionId"

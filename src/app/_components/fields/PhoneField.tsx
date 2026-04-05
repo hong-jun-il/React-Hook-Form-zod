@@ -2,8 +2,7 @@
 
 import { MemberInput } from "@/types/info.schema";
 import { useFormContext, useFormState } from "react-hook-form";
-import { Field } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+import { Field, FieldLabel } from "@/components/ui/field";
 import RHFSelect from "@/components/RHF/RHFSelect";
 import { PHONE_PREFIX_OPTIONS } from "@/constants/phone.const";
 import { cn } from "@/lib/utils";
@@ -21,7 +20,7 @@ export function PhoneField() {
 
   return (
     <Field>
-      <Label htmlFor="phone.number">핸드폰</Label>
+      <FieldLabel htmlFor="phone.number">핸드폰</FieldLabel>
       <div className={cn("flex items-center gap-2")}>
         <RHFSelect<MemberInput>
           id="phone.prefix"

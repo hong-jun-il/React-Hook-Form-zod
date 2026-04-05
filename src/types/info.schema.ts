@@ -5,8 +5,8 @@ const GENDER_VALUES = ["MAN", "WOMAN"] as const;
 const BaseSchema = z.object({
   email: z
     .object({
-      id: z.string().min(1, "이메일을 입력하세요"),
-      domain: z.string().min(1, "도메인을 선택하세요"),
+      id: z.string().trim().min(1, "이메일을 입력하세요"),
+      domain: z.string().trim().min(1, "도메인을 선택하세요"),
     })
     .refine(
       (data) => {
@@ -14,8 +14,7 @@ const BaseSchema = z.object({
         return z.email().safeParse(full).success;
       },
       {
-        message: "올바른 이메일 형식이 아닙니다.",
-        path: ["id"],
+        error: "올바른 이메일 형식이 아닙니다.",
       },
     ),
   loginId: z.string().trim().min(1, { error: "아이디를 입력해주세요." }),
@@ -42,7 +41,7 @@ const BaseSchema = z.object({
     z.coerce.number({ error: "올바른 팀의 형식이 아닙니다." }),
   ),
   positionId: z.coerce.number({ error: "직무를 선택해주세요." }),
-  stacks: z.array(z.string().trim()),
+  stacks: z.array(z.number()),
   isAgreed: z.boolean(),
 });
 
@@ -73,7 +72,7 @@ const ModeSchema = z.discriminatedUnion("variant", [
 const StatusSchema = z.discriminatedUnion("status", [
   z.object({
     status: z.literal("NEW"),
-    graduationDate: z.coerce.date({ error: "졸업일을 선택하세요." }),
+    graduationDate: z.string().min(1, { error: "졸업일을 선택하세요." }),
   }),
 
   z.object({
@@ -82,7 +81,7 @@ const StatusSchema = z.discriminatedUnion("status", [
       z
         .object({
           from: z.string().min(1, { error: "시작일을 선택해주세요." }),
-          to: z.string().min(1, { error: "시작일을 선택해주세요." }),
+          to: z.string().min(1, { error: "퇴사일을 선택해주세요." }),
           companyName: z.string().min(1, { error: "회사명을 입력해주세요" }),
         })
         .refine((data) => new Date(data.to) >= new Date(data.from), {

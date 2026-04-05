@@ -11,18 +11,19 @@ import {
 import { Button } from "../ui/button";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
-import { date } from "zod";
 
 type Props<T extends FieldValues> = {
   name: Path<T>;
   placeholder: string;
   id?: string;
+  disabled?: (date: Date) => boolean;
 };
 
 export default function RHFCalendar<T extends FieldValues>({
   name,
   placeholder,
   id,
+  disabled: externalDisabled,
 }: Props<T>) {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -60,8 +61,14 @@ export default function RHFCalendar<T extends FieldValues>({
                 }
                 setOpen(false);
               }}
-              disabled={(date) => date > new Date()}
-              defaultMonth={field.value}
+              disabled={(date) => {
+                const isFuture = date > new Date();
+                return (
+                  isFuture ||
+                  (externalDisabled ? externalDisabled(date) : false)
+                );
+              }}
+              defaultMonth={field.value ? new Date(field.value) : new Date()}
             />
           </PopoverContent>
         </Popover>
