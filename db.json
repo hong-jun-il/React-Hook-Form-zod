@@ -57,17 +57,127 @@
   ],
   "members": [
     {
-      "id": 1,
-      "email": "user1@user.com",
+      "variant": "create",
+      "status": "NEW",
+      "email": {
+        "id": "user1",
+        "domain": "gmail.com"
+      },
       "loginId": "user1",
-      "password": "user1@user1",
+      "password": "user1234!",
+      "confirmPassword": "user1234!",
       "gender": "WOMAN",
-      "birth": { "year": "2002", "month": "03", "day": "20" },
-      "phone": { "prefix": "010", "number": "11112222" },
+      "birth": {
+        "year": "2002",
+        "month": "03",
+        "day": "20"
+      },
+      "phone": {
+        "prefix": "010",
+        "number": "11112222"
+      },
       "generation": 1,
       "teamId": 103,
       "positionId": 1,
-      "isAgreed": true
+      "stacks": [1, 5, 12],
+      "isAgreed": true,
+      "graduationDate": "2026-02-28"
+    },
+    {
+      "variant": "edit",
+      "status": "EXP",
+      "id": "uuid-9999-8888",
+      "email": {
+        "id": "senior_dev",
+        "domain": "naver.com"
+      },
+      "loginId": "senior_dev",
+      "gender": "MAN",
+      "birth": {
+        "year": "1995",
+        "month": "07",
+        "day": "15"
+      },
+      "phone": {
+        "prefix": "010",
+        "number": "55556666"
+      },
+      "generation": 2,
+      "teamId": 201,
+      "positionId": 3,
+      "stacks": [2, 10],
+      "isAgreed": true,
+      "experiences": [
+        {
+          "from": "2022-01-01",
+          "to": "2024-12-31",
+          "companyName": "Tech Giants Co."
+        },
+        {
+          "from": "2025-01-15",
+          "to": "2026-03-01",
+          "companyName": "AI Start-up"
+        }
+      ]
+    },
+    {
+      "variant": "create",
+      "status": "EXP",
+      "email": {
+        "id": "expert",
+        "domain": "kakao.com"
+      },
+      "loginId": "expert_user",
+      "password": "securePassword!1",
+      "confirmPassword": "securePassword!1",
+      "gender": "WOMAN",
+      "birth": {
+        "year": "1990",
+        "month": "11",
+        "day": "11"
+      },
+      "phone": {
+        "prefix": "010",
+        "number": "99990000"
+      },
+      "generation": 5,
+      "teamId": null,
+      "positionId": 2,
+      "stacks": [7],
+      "isAgreed": true,
+      "experiences": [
+        {
+          "from": "2015-03-01",
+          "to": "2023-10-20",
+          "companyName": "Legacy Systems"
+        }
+      ]
+    },
+    {
+      "variant": "edit",
+      "status": "NEW",
+      "id": "mem-001",
+      "email": {
+        "id": "newbie",
+        "domain": "outlook.com"
+      },
+      "loginId": "newbie_id",
+      "gender": "MAN",
+      "birth": {
+        "year": "2003",
+        "month": "12",
+        "day": "25"
+      },
+      "phone": {
+        "prefix": "010",
+        "number": "77778888"
+      },
+      "generation": 3,
+      "teamId": 105,
+      "positionId": 1,
+      "stacks": [],
+      "isAgreed": true,
+      "graduationDate": "2027-08-30"
     }
   ]
 }

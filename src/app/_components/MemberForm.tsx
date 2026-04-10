@@ -26,7 +26,7 @@ import {
   useFormContext,
   useWatch,
 } from "react-hook-form";
-import { defaultValues, MemberInput, MemberOutput } from "@/types/info.schema";
+import { defaultValues, MemberInput } from "@/types/info.schema";
 import AgreeField from "./fields/AgreeField";
 import ExperienceField from "./fields/ExperienceField";
 import ExperienceNewField from "./fields/ExperienceNewField";
