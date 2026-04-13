@@ -3,11 +3,9 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-  CardAction,
 } from "@/components/ui/card";
 import { FieldGroup } from "@/components/ui/field";
 import { MemberProvider } from "./MemberProvider";
@@ -35,8 +33,12 @@ import ExperienceExpField from "./fields/ExperienceExpField";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import PasswordField from "./fields/PasswordField";
+import { useMembers } from "@/hooks/quries";
 
 function MemberForm() {
+  const { data: members } = useMembers();
+  console.log(members);
+
   const { control, unregister, setValue, handleSubmit, reset } =
     useFormContext<MemberInput>();
   const status = useWatch({
